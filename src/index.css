@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #6c25e9;
+  --primary-light: #ece9f8;
+  --secondary: #dddbf1;
+  --background: #ffffff;
+  --surface: #ffffff;
+  --workspace-bg: #ecebf1;
+  
+  --text-primary: #1d2226;
+  --text-secondary: #65696d;
+  --text-muted: #9ba0a6;
+  --border-color: #cbcbcb;
+  
+  --font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --border-radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--workspace-bg);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Simulated iPhone 6s Device Frame */
+.app-container {
+  width: 415px; /* Screen 375px + side bezels */
+  height: 800px; /* Screen 640px + top/bottom bezels */
+  background-color: #1a1a1c; /* Matte Black Bezel */
+  border-radius: 48px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25), 0 0 0 3px #2d2d30;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 80px 20px; /* Space for Top/Bottom speaker/home button */
+  box-sizing: border-box;
+  transform: scale(min(1, calc((100vh - 40px) / 800px)));
+  transform-origin: center center;
+}
+
+/* Front Camera and Ear Speaker */
+.iphone-top-bar {
+  position: absolute;
+  top: 42px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 5px;
+  background-color: #333336;
+  border-radius: 10px;
+  z-index: 10;
+}
+
+/* Clickable Home Button */
+.iphone-home-button {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: 2px solid #333336;
+  border-radius: 50%;
+  z-index: 10;
+  cursor: pointer;
+  outline: none;
+  transition: var(--transition);
+}
+
+.iphone-home-button:hover {
+  border-color: #4a4a4f;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.iphone-home-button:active {
+  transform: translateX(-50%) scale(0.92);
+  border-color: var(--primary);
+  background-color: rgba(108, 37, 233, 0.1);
+}
+
+/* Restricted iPhone 6s Screen Wrapper */
+.screen-wrapper {
+  width: 375px;
+  height: 640px; /* Restricted iPhone 6s viewport height (approx 667px physical viewable) */
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  border-radius: 4px; /* Slight screen edge rounding */
+}
+
+/* Inner scroll wrapper */
+.screen-content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+/* Hide scrollbar but keep functionality */
+.screen-content::-webkit-scrollbar {
+  width: 5px;
+}
+.screen-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.screen-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+/* Typography */
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 32px;
+}
+
+/* Primary Purple Button */
+.btn-primary {
+  width: 100%;
+  padding: 16px;
+  background-color: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(108, 37, 233, 0.2);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #5514cb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(108, 37, 233, 0.3);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  background-color: var(--border-color);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  width: 100%;
+  padding: 16px;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background-color: #dfdaf3;
+}
+
+/* Floating Label Inputs (cutout border style) */
+.input-container {
+  position: relative;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.input-field {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--text-primary);
+  background-color: transparent;
+  outline: none;
+  transition: var(--transition);
+}
+
+.input-field:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.input-label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ffffff;
+  padding: 0 6px;
+  color: var(--text-secondary);
+  font-size: 15px;
+  transition: var(--transition);
+  pointer-events: none;
+}
+
+/* Float label to border cutout */
+.input-field:focus ~ .input-label,
+.input-field:not(:placeholder-shown) ~ .input-label {
+  top: 0;
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+/* Keep label purple when floated */
+.input-field:not(:focus):not(:placeholder-shown) ~ .input-label {
+  color: var(--primary);
+}
+
+/* Custom Radio Group Styles */
+.radio-section-label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.radio-group {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: var(--text-primary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.radio-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-custom {
+  height: 20px;
+  width: 20px;
+  background-color: transparent;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.radio-label:hover .radio-custom {
+  border-color: var(--primary);
+}
+
+.radio-input:checked ~ .radio-custom {
+  border-color: var(--primary);
+}
+
+.radio-custom::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  display: block;
+  transform: scale(0);
+  transition: var(--transition);
+}
+
+.radio-input:checked ~ .radio-custom::after {
+  transform: scale(1);
+}
+
+/* Responsive view: Hide mockup frame on real mobile devices */
+@media (max-width: 480px) {
+  body {
+    height: 100%;
+    overflow: auto;
+  }
+  
+  #root {
+    height: auto;
+  }
+  
+  .app-container {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    transform: none !important;
+    background-color: #ffffff;
+  }
+  
+  .screen-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  
+  .iphone-top-bar,
+  .iphone-home-button {
+    display: none !important;
+  }
+}
